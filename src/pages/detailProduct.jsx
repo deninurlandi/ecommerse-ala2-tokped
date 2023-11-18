@@ -17,11 +17,35 @@ export default function DetailProduct() {
     });
   }, []);
   const [product, setProduct] = useState([]);
+  const { wishList, setWishList } = useContext(WishList);
+
+  function handleStatWish(id) {
+    const updatedWishList = [...wishList];
+    const wishIndex = updatedWishList.find((item) => item.id === parseInt(id));
+
+    if (wishIndex) {
+      wishIndex.wishcek = !wishIndex.wishcek;
+    } else {
+      updatedWishList.push({ id: parseInt(id), wishcek: true });
+    }
+
+    setWishList(updatedWishList);
+    localStorage.setItem('wish', JSON.stringify(updatedWishList));
+  }
+
+  useEffect(() => {
+    localStorage.setItem('wish', JSON.stringify(wishList));
+  }, [wishList]);
 
   return (
     <>
       <LayoutHomeUp />
-      <NavDetailProduct id={id} price={product.price} />
+      <NavDetailProduct
+        id={id}
+        price={product.price}
+        handleStatWish={handleStatWish}
+        wishList={wishList}
+      />
       <div className="w-full pt-24 px-5 lg:px-20 xl:px-32 mb-60">
         <div className="flex flex-wrap lg:flex-nowrap justify-center gap-3">
           {Object.keys(product).length > 0 && (
@@ -34,7 +58,12 @@ export default function DetailProduct() {
                 rate={product.rating.rate}
                 rev={product.rating.count}
               />
-              <ChangeBuy id={product.id} price={product.price} />
+              <ChangeBuy
+                id={product.id}
+                price={product.price}
+                handleStatWish={handleStatWish}
+                wishList={wishList}
+              />
             </>
           )}
         </div>
@@ -89,14 +118,12 @@ function Description(props) {
 }
 
 function ChangeBuy(props) {
-  const { id, price } = props;
+  const { id, price, handleStatWish, wishList } = props;
   const { isCart, setIsCart } = useContext(Cart);
   const [qty, setQty] = useState(1);
   const [stock, setIsStock] = useState(30);
   const [totalPrice, setTotalPrice] = useState(0);
   const { setTotalCart } = useContext(TotalCart);
-
-  const { wishList, setWishList } = useContext(WishList);
 
   // const cart = localStorage.getItem('cart');
   // const total = JSON.parse(cart).reduce((acc, item) => {
@@ -147,31 +174,11 @@ function ChangeBuy(props) {
     localStorage.setItem('cart', JSON.stringify(isCart));
   }, [isCart]);
 
-  function handleStatWish(id) {
-    const updatedWishList = [...wishList];
-    const wishIndex = updatedWishList.findIndex((item) => item.id === id);
-
-    if (wishIndex !== -1) {
-      updatedWishList[wishIndex].wishcek = !updatedWishList[wishIndex].wishcek;
-    } else {
-      updatedWishList.push({ id, wishcek: true });
-    }
-
-    setWishList(updatedWishList);
-    localStorage.setItem('wish', JSON.stringify(updatedWishList));
-  }
-
-  useEffect(() => {
-    localStorage.setItem('wish', JSON.stringify(wishList));
-  }, [wishList]);
-
   const checkWish = wishList.find(
-    (item) => item.id === id && item.wishcek === true,
+    (item) => item.id === parseInt(id) && item.wishcek === true,
   );
   const svgStyle = checkWish ? 'fill-red-500' : 'fill-slate-400';
   const pStyle = checkWish ? 'Wislish (✅)' : 'Add To Wislish';
-
-  useEffect(() => {});
 
   return (
     <div className="hidden md:flex w-full lg:w-1/4 justify-center lg:justify-normal lg:flex-col">
@@ -242,9 +249,10 @@ function ChangeBuy(props) {
   );
 }
 
-function NavDetailProduct({ id, price }) {
+function NavDetailProduct({ id, price, handleStatWish, wishList }) {
   const [qty, setQty] = useState(1);
   const { isCart, setIsCart } = useContext(Cart);
+
   function handleAddCart(id) {
     const cartId = isCart.find((item) => item.id == id);
 
@@ -254,7 +262,7 @@ function NavDetailProduct({ id, price }) {
     } else {
       setIsCart([
         ...isCart,
-        { id, qty: qty, checked: false, total: qty * price },
+        { id: parseInt(id), qty: qty, checked: false, total: qty * price },
       ]);
     }
     localStorage.setItem('cart', JSON.stringify(isCart));
@@ -263,31 +271,37 @@ function NavDetailProduct({ id, price }) {
     localStorage.setItem('cart', JSON.stringify(isCart));
   }, [isCart]);
 
+  const checkWish = wishList.find(
+    (item) => item.id === parseInt(id) && item.wishcek === true,
+  );
+  const svgStyle = checkWish ? 'fill-red-500' : 'fill-slate-400';
+  const pStyle = checkWish ? 'Wislish (✅)' : 'Add';
+
   return (
     <>
       <div className="z-10 border-t-2 bg-white border-cyan-500 md:hidden fixed flex justify-between items-center bottom-0 left-0 right-0 p-3 px-7 sm:px-9">
         <div>
           <div className="flex justify-center items-center">
-            <div className="cursor-pointer">
+            <div onClick={() => handleStatWish(id)} className="cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 id="Filled"
                 viewBox="0 0 24 24"
                 width="20px"
                 height="20px"
-                className=""
+                className={svgStyle}
               >
                 <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" />
               </svg>
             </div>
-            <p className="ml-2 font-bold"></p>
+            <p className="ml-2 font-bold">{pStyle}</p>
           </div>
         </div>
-        <div className="flex gap-14">
+        <div className="flex gap-4">
           <div>
             <button
               className={
-                'bg-green-500 font-bold text-white px-7 py-2 rounded-lg'
+                'bg-green-500 transition sm:px-14 font-bold text-white px-9 py-2 rounded-lg'
               }
             >
               BuyNow
@@ -297,7 +311,7 @@ function NavDetailProduct({ id, price }) {
             <button
               onClick={() => handleAddCart(id)}
               className={
-                'bg-cyan-500 font-bold text-slate-200 px-7 py-2 rounded-lg'
+                'bg-cyan-500 font-bold transition sm:px-14 text-slate-200 px-9 py-2 rounded-lg'
               }
             >
               Add Cart

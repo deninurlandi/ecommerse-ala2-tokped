@@ -15,6 +15,7 @@ import DaftarWishlist from './pages/daftarWishList.jsx';
 import Profil from './pages/profil.jsx';
 import Products from './pages/products.jsx';
 import Transaction from './pages/transaction.jsx';
+import ImageSlider from './pages/imageSlider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: '/profile',
     element: <Profil />,
+  },
+  {
+    path: '/slider',
+    element: <ImageSlider />,
   },
 ]);
 

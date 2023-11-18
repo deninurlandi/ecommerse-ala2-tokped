@@ -7,6 +7,7 @@ import { getProducts } from '../services/Fetchproducts';
 import { addProducts } from '../redux/action/productsSlice';
 import LayoutHomeUp from '../componen/layout/layoutHomeUp';
 import LayoutHomeDown from '../componen/layout/layoutHomeDown';
+import ImageSlider from './imageSlider';
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -23,7 +24,8 @@ export default function Products() {
     <>
       <LayoutHomeUp />
       <LayoutHomeDown />
-      <div className="pt-24 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-16 justify-center grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] md:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] ">
+      <ImageSlider />
+      <div className="pt-8 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-16 justify-center grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] md:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] ">
         {products.length > 0 &&
           products.map((product) => (
             <CardProduct key={product.id}>
