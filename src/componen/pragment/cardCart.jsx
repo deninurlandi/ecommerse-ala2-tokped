@@ -11,6 +11,7 @@ export default function CardCart(props) {
     price,
     qty,
     id,
+    total,
     checked,
     handleRemove,
     handleMinusTotal,
@@ -43,7 +44,7 @@ export default function CardCart(props) {
 
   return (
     <div className="w-full max-w-2xl">
-      <div className="border-b-2 p-3 rounded-lg flex gap-4 shadow-md">
+      <div className="border-b-2 p-3 pb-6 rounded-lg flex gap-4 shadow-md">
         <div>
           <input
             onChange={() => handleChecked(id)}
@@ -112,16 +113,21 @@ export default function CardCart(props) {
               </svg>
             </div>
 
-            <div className="flex border-2 border-cyan-500 p-1 rounded-3xl">
+            <div className="flex border-2 border-cyan-500 p-1 justify-center rounded-3xl relative">
+              <div className="absolute -bottom-6">
+                <div className="text-sm font-bold">
+                  Total : $ {total.toFixed(2)}
+                </div>
+              </div>
               <div
-                onClick={() => handleMinusTotal(id)}
+                onClick={() => handleMinusTotal(id, price)}
                 className="cursor-pointer w-7 h-7 text-2xl font-bold rounded-full flex items-center justify-center border-2 border-cyan-500 mr-5"
               >
                 -
               </div>
               <span className="text-xl font-bold">{qty}</span>
               <div
-                onClick={() => handlePlusTotal(id)}
+                onClick={() => handlePlusTotal(id, price)}
                 className="cursor-pointer w-7 h-7 text-xl font-bold rounded-full flex items-center justify-center border-2 ml-5 border-cyan-500"
               >
                 +

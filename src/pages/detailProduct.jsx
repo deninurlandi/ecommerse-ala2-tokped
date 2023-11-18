@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from 'react';
@@ -9,18 +10,18 @@ import { TotalCart } from '../context/totalCart';
 import { WishList } from '../context/wislish';
 
 export default function DetailProduct() {
-  const [product, setProduct] = useState([]);
-
   const { id } = useParams();
   useEffect(() => {
     getDetailProduct(id, (response) => {
       setProduct(response);
     });
   }, []);
+  const [product, setProduct] = useState([]);
 
   return (
     <>
       <LayoutHomeUp />
+      <NavDetailProduct id={id} price={product.price} />
       <div className="w-full pt-24 px-5 lg:px-20 xl:px-32 mb-60">
         <div className="flex flex-wrap lg:flex-nowrap justify-center gap-3">
           {Object.keys(product).length > 0 && (
@@ -92,7 +93,7 @@ function ChangeBuy(props) {
   const { isCart, setIsCart } = useContext(Cart);
   const [qty, setQty] = useState(1);
   const [stock, setIsStock] = useState(30);
-  const totalPrice = price * qty;
+  const [totalPrice, setTotalPrice] = useState(0);
   const { setTotalCart } = useContext(TotalCart);
 
   const { wishList, setWishList } = useContext(WishList);
@@ -107,6 +108,10 @@ function ChangeBuy(props) {
     setIsStock(30 - qty);
   }, [qty, isCart]);
 
+  useEffect(() => {
+    setTotalPrice(qty * price);
+  }, [qty, price]);
+
   function handleAddQty() {
     if (qty < 30) {
       setQty(qty + 1);
@@ -120,10 +125,15 @@ function ChangeBuy(props) {
 
   function handleAddCart(id) {
     const cartId = isCart.find((item) => item.id == id);
+
     if (cartId) {
+      cartId.total = totalPrice;
       cartId.qty = qty;
     } else {
-      setIsCart([...isCart, { id, qty: qty, checked: false }]);
+      setIsCart([
+        ...isCart,
+        { id, qty: qty, checked: false, total: totalPrice },
+      ]);
     }
     localStorage.setItem('cart', JSON.stringify(isCart));
     setTotalCart(isCart.length);
@@ -161,8 +171,10 @@ function ChangeBuy(props) {
   const svgStyle = checkWish ? 'fill-red-500' : 'fill-slate-400';
   const pStyle = checkWish ? 'Wislish (✅)' : 'Add To Wislish';
 
+  useEffect(() => {});
+
   return (
-    <div className="w-full lg:w-1/4 flex justify-center lg:flex-col">
+    <div className="hidden md:flex w-full lg:w-1/4 justify-center lg:justify-normal lg:flex-col">
       <div className=" p-5 rounded-xl w-full max-w-lg bg-slate-50 border-cyan-500 border-2 h-auto">
         <div>
           <h3 className="font-bold text-xl text-slate-900 mb-3">
@@ -195,7 +207,7 @@ function ChangeBuy(props) {
           </div>
           <div className="flex justify-between items-center mb-3">
             <p className="font-medium text-slate-600">Sub Total</p>
-            <b className="text-xl font-bold">$ {totalPrice}</b>
+            <b className="text-xl font-bold">$ {totalPrice.toFixed(2)}</b>
           </div>
           <div className="flex justify-between gap-2 lg:flex-wrap mb-2">
             <div className="rounded-3xl border-2 border-cyan-400  px-3 py-1 lg:mb-2 flex items-center">
@@ -227,5 +239,72 @@ function ChangeBuy(props) {
         </div>
       </div>
     </div>
+  );
+}
+
+function NavDetailProduct({ id, price }) {
+  const [qty, setQty] = useState(1);
+  const { isCart, setIsCart } = useContext(Cart);
+  function handleAddCart(id) {
+    const cartId = isCart.find((item) => item.id == id);
+
+    if (cartId) {
+      cartId.total = qty * price;
+      cartId.qty = qty;
+    } else {
+      setIsCart([
+        ...isCart,
+        { id, qty: qty, checked: false, total: qty * price },
+      ]);
+    }
+    localStorage.setItem('cart', JSON.stringify(isCart));
+  }
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(isCart));
+  }, [isCart]);
+
+  return (
+    <>
+      <div className="z-10 border-t-2 bg-white border-cyan-500 md:hidden fixed flex justify-between items-center bottom-0 left-0 right-0 p-3 px-7 sm:px-9">
+        <div>
+          <div className="flex justify-center items-center">
+            <div className="cursor-pointer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                id="Filled"
+                viewBox="0 0 24 24"
+                width="20px"
+                height="20px"
+                className=""
+              >
+                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" />
+              </svg>
+            </div>
+            <p className="ml-2 font-bold"></p>
+          </div>
+        </div>
+        <div className="flex gap-14">
+          <div>
+            <button
+              className={
+                'bg-green-500 font-bold text-white px-7 py-2 rounded-lg'
+              }
+            >
+              BuyNow
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => handleAddCart(id)}
+              className={
+                'bg-cyan-500 font-bold text-slate-200 px-7 py-2 rounded-lg'
+              }
+            >
+              Add Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

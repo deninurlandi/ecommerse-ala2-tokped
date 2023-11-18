@@ -11,7 +11,7 @@ export default function LayoutHomeUp() {
 
   return (
     <>
-      <div className="navbar-fixed fixed left-0 right-0 top-0 py-2 flex items-center justify-between bg-white px-3 md:px-8 lg:px-14">
+      <div className=" z-50 navbar-fixed fixed left-0 right-0 top-0 py-2 flex items-center justify-between bg-white px-3 md:px-8 lg:px-14">
         <Link to="/">
           <div className=" flex items-center flex-row p-2 ">
             <svg

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
 import './index.css';
 import { Provider } from 'react-redux';
 import products from './redux/products.js';
@@ -14,11 +13,13 @@ import PageCart from './pages/pageCart.jsx';
 import WishListContextProvider from './context/wislish.jsx';
 import DaftarWishlist from './pages/daftarWishList.jsx';
 import Profil from './pages/profil.jsx';
+import Products from './pages/products.jsx';
+import Transaction from './pages/transaction.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Products />,
   },
   {
     path: '/login',
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: '/cart',
     element: <PageCart />,
+  },
+  {
+    path: '/transaction',
+    element: <Transaction />,
   },
   {
     path: '/wishlist',

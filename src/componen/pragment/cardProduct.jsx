@@ -42,7 +42,7 @@ function Price(props) {
       <p className="text-lg font-semibold text-slate-900">$ {price}</p>
       <div className="flex items-center">
         <p className="text-sm font-medium line-through text-slate-900">
-          ${Math.round(price + (price * 10) / 100)}{' '}
+          ${(price + (price * 10) / 100).toFixed(2)}{' '}
         </p>
         <p className="text-xs shadow rounded-lg px-1.5 py-0.5 ml-3 font-semibold text-white bg-emerald-500">
           Discont 10%

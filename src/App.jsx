@@ -14,12 +14,6 @@ import Profil from './pages/profil';
 import DaftarWishlist from './pages/daftarWishList';
 
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getProducts((response) => {
-      dispatch(addProducts(response));
-    });
-  }, []);
   const { totalCart } = useContext(TotalCart);
   const [home, setHome] = useState(true);
   const [wish, setWish] = useState(false);

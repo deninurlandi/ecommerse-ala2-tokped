@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import LayoutHomeUp from '../componen/layout/layoutHomeUp';
+import LayoutHomeDown from '../componen/layout/layoutHomeDown';
 
 export default function Profil() {
   return (
@@ -172,6 +174,8 @@ function AppAndDev() {
 
   return (
     <>
+      <LayoutHomeUp />
+      <LayoutHomeDown />
       <div className="px-4 mb-3">
         <div
           onClick={handleIsOpen1}
