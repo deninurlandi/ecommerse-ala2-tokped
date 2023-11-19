@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 export default function CardProduct({ children }) {
   return (
-    <div className=" md:max-w-[18rem] max-w-[12rem] flex flex-col justify-between bg-white rounded-lg shadow-md overflow-hidden pb-5 box-border border">
+    <div className=" md:max-w-[18rem] max-w-[12rem] flex flex-col justify-between bg-white rounded-lg shadow-md overflow-hidden border-slate-300 pb-5 box-border border">
       {children}
     </div>
   );

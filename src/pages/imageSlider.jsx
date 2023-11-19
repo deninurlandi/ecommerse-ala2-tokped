@@ -1,73 +1,104 @@
 // ImageSlider.jsx atau komponen yang berisi slider
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function ImageSlider() {
   const [sliderState, setSliderState] = useState(1);
+  const location = useLocation();
 
   const handleRadioChange = (event) => {
     setSliderState(parseInt(event.target.value));
   };
+  useEffect(() => {
+    handleRadioChange;
+  }, []);
+
+  const slider = useRef();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setSliderState((prevSliderState) =>
         prevSliderState === 4 ? 1 : prevSliderState + 1,
       );
-    }, 7000);
+    }, 5000);
+    if (location.pathname !== '/') {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
 
-    return () => clearInterval(intervalId); // Membersihkan interval saat komponen di-unmount
+    // Membersihkan interval saat komponen di-unmount
   }, []); // Dependensi kosong agar efek ini hanya dijalankan sekali saat komponen dipasang
+  const styleNum = (sliderState - 1) * 20;
 
   return (
     <section className=" flex justify-center">
-      <div className="pt-24 w-full max-w-6xl px-5 md:px-10 lg:px-16">
+      <div className="pt-24 w-full max-w-[1200px] px-5 md:px-10 lg:px-16">
         <div className="w-full rounded-lg h-80 border relative overflow-hidden">
           <div className="w-[500%] flex h-80">
-            {/* Input checkboxes */}
             <div className="hidden">
               <input
                 type="radio"
                 name="slider"
                 id="slider-1"
                 value="1"
-                onClick={handleRadioChange}
+                onClick={(e) => handleRadioChange(e)}
               />
               <input
                 type="radio"
                 name="slider"
                 id="slider-2"
                 value="2"
-                onClick={handleRadioChange}
+                onClick={(e) => handleRadioChange(e)}
               />
               <input
                 type="radio"
                 name="slider"
                 id="slider-3"
                 value="3"
-                onClick={handleRadioChange}
+                onClick={(e) => handleRadioChange(e)}
               />
               <input
                 type="radio"
                 name="slider"
                 id="slider-4"
                 value="4"
-                onClick={handleRadioChange}
+                onClick={(e) => handleRadioChange(e)}
               />
             </div>
 
             <div
-              className={`w-[20%] h-80 bg-slate-400 transition-all duration-[2000ms] -ml-[${
-                (sliderState - 1) * 20
-              }%]`}
-            ></div>
-            <div className="w-[20%] h-80 bg-slate-500 transition-all duration-[2000ms]"></div>
-            <div className="w-[20%] h-80 bg-slate-600 transition-all duration-[2000ms]"></div>
-            <div className="w-[20%] h-80 bg-slate-700 transition-all duration-[2000ms]"></div>
-
-            {/* Labels */}
+              ref={slider}
+              className={`w-[20%] h-80 overflow-hidden  bg-slate-400 transition-all duration-[2000ms] -ml-[${styleNum}%]`}
+            >
+              <img
+                src="../../public/1.jpg"
+                className="w-full h-full object-cover"
+                alt=""
+              />
+            </div>
+            <div className="w-[20%] h-80 bg-slate-500 transition-all duration-[2000ms]">
+              <img
+                src="../../public/2.jpg"
+                className="w-full h-full object-cover"
+                alt=""
+              />
+            </div>
+            <div className="w-[20%] h-80 bg-slate-600 transition-all duration-[2000ms]">
+              <img
+                src="../../public/3.jpg"
+                className="w-full h-full object-cover"
+                alt=""
+              />
+            </div>
+            <div className="w-[20%] h-80 bg-slate-700 transition-all duration-[2000ms]">
+              <img
+                src="../../public/4.jpg"
+                className="w-full h-full object-cover "
+                alt=""
+              />
+            </div>
           </div>
 
-          {/* Slider indicators */}
           <div className="absolute top-72 w-full flex justify-center">
             <label
               htmlFor="slider-1"

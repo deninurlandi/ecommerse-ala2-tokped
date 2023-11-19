@@ -4,10 +4,18 @@
 import { Link } from 'react-router-dom';
 import { TotalCart } from '../../context/totalCart';
 import { useContext } from 'react';
+import { NameSearch } from '../../context/nameSearch';
 
 /* eslint-disable react/no-unknown-property */
 export default function LayoutHomeUp() {
   const { totalCart } = useContext(TotalCart);
+  const { nameSearch, setNameSearch } = useContext(NameSearch);
+
+  function handleSearch(e) {
+    e.preventDefault();
+    setNameSearch('');
+    window.location.href = `/search/${nameSearch}`;
+  }
 
   return (
     <>
@@ -31,7 +39,7 @@ export default function LayoutHomeUp() {
         </Link>
 
         <div className="w-full max-w-xl p-2">
-          <form action="" className="relative">
+          <form action="" className="relative" onSubmit={handleSearch}>
             <div className="absolute top-[10px] left-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -46,6 +54,9 @@ export default function LayoutHomeUp() {
             </div>
             <input
               type="text"
+              name="search"
+              value={nameSearch}
+              onChange={(e) => setNameSearch(e.target.value)}
               placeholder="Search..."
               className="px-10 py-[5px] rounded-lg w-full border border-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-300 focus:border-cyan-300  "
             />

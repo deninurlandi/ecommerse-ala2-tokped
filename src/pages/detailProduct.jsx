@@ -12,8 +12,12 @@ import { WishList } from '../context/wislish';
 export default function DetailProduct() {
   const { id } = useParams();
   useEffect(() => {
-    getDetailProduct(id, (response) => {
-      setProduct(response);
+    getDetailProduct(id, (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        setProduct(response);
+      }
     });
   }, []);
   const [product, setProduct] = useState([]);

@@ -15,7 +15,8 @@ import DaftarWishlist from './pages/daftarWishList.jsx';
 import Profil from './pages/profil.jsx';
 import Products from './pages/products.jsx';
 import Transaction from './pages/transaction.jsx';
-import ImageSlider from './pages/imageSlider.jsx';
+import NameSearchContextProvider from './context/nameSearch.jsx';
+import PageSearch from './pages/pageSearch.jsx';
 
 const router = createBrowserRouter([
   {
@@ -51,20 +52,23 @@ const router = createBrowserRouter([
     element: <Profil />,
   },
   {
-    path: '/slider',
-    element: <ImageSlider />,
+    path: '/search/:name',
+    element: <PageSearch />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <Provider store={products}>
       <CartContextProvider>
-        <TotalCartContextProvider>
-          <WishListContextProvider>
-            <RouterProvider router={router} />
-          </WishListContextProvider>
-        </TotalCartContextProvider>
+        <NameSearchContextProvider>
+          <TotalCartContextProvider>
+            <WishListContextProvider>
+              <RouterProvider router={router} />
+            </WishListContextProvider>
+          </TotalCartContextProvider>
+        </NameSearchContextProvider>
       </CartContextProvider>
     </Provider>
   </React.StrictMode>,

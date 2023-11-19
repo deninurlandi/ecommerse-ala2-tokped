@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 /* eslint-disable react/prop-types */
 export default function LayoutHomeDown() {
+  const location = useLocation();
   return (
     <>
       <div className="z-50 navbar-fixed-down fixed left-0 right-0 flex bottom-0 items-center justify-around py-3 bg-white px-5 md:hidden">

@@ -1,11 +1,29 @@
 export function getProducts(callback) {
-  return fetch('https://fakestoreapi.com/products')
+  fetch('https://fakestoreapi.com/products')
     .then((response) => response.json())
-    .then((response) => callback(response));
+    .then((data) => {
+      if (callback && typeof callback === 'function') {
+        callback(null, data);
+      }
+    })
+    .catch((error) => {
+      if (callback && typeof callback === 'function') {
+        callback(error, null);
+      }
+    });
 }
 
 export function getDetailProduct(id, callback) {
-  return fetch(`https://fakestoreapi.com/products/${id}`)
-    .then((res) => res.json())
-    .then((json) => callback(json));
+  fetch(`https://fakestoreapi.com/products/${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      if (callback && typeof callback === 'function') {
+        callback(null, data);
+      }
+    })
+    .catch((error) => {
+      if (callback && typeof callback === 'function') {
+        callback(error, null);
+      }
+    });
 }

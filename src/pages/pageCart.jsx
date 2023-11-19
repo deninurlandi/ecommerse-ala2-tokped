@@ -3,20 +3,11 @@
 import { useContext, useEffect, useState } from 'react';
 import LayoutHomeUp from '../componen/layout/layoutHomeUp';
 import CardCart from '../componen/pragment/cardCart';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../services/Fetchproducts';
-import { addProducts } from '../redux/action/productsSlice';
 import { Cart } from '../context/cart';
 import { TotalCart } from '../context/totalCart';
+import { useSelector } from 'react-redux';
 
 export default function PageCart() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    getProducts((response) => {
-      dispatch(addProducts(response));
-    });
-  }, []);
   const { isCart, setIsCart } = useContext(Cart);
   const [newCart, setNewCart] = useState(isCart);
   const { setTotalCart } = useContext(TotalCart);
@@ -129,32 +120,30 @@ export default function PageCart() {
         priceCheckot={priceCheckot}
         lengthCheckout={lengthCheckout}
       />
-      {isCart.length > 0 && (
+      {newCart.length > 0 && products && products.length > 0 && (
         <div className="w-full pt-24 px-6 md:flex md:justify-center md:gap-2">
           <div className="flex flex-col gap-3 justify-center items-center pb-24 ">
-            {isCart.length > 0 &&
-              products.length > 0 &&
-              isCart.map((item) => {
-                const product = products.find((pr) => pr.id === item.id);
-                if (product) {
-                  return (
-                    <CardCart
-                      key={item.id}
-                      id={item.id}
-                      checked={item.checked}
-                      image={product.image}
-                      title={product.title}
-                      price={product.price}
-                      qty={item.qty}
-                      total={item.total}
-                      handleRemove={handleRemoveCart}
-                      handleMinusTotal={handleMinusTotal}
-                      handlePlusTotal={handlePlusTotal}
-                      handleChecked={handleChecked}
-                    />
-                  );
-                }
-              })}
+            {newCart.map((item) => {
+              const product = products.find((pr) => pr.id === item.id);
+              if (product) {
+                return (
+                  <CardCart
+                    key={item.id}
+                    id={item.id}
+                    checked={item.checked}
+                    image={product.image}
+                    title={product.title}
+                    price={product.price}
+                    qty={item.qty}
+                    total={item.total}
+                    handleRemove={handleRemoveCart}
+                    handleMinusTotal={handleMinusTotal}
+                    handlePlusTotal={handlePlusTotal}
+                    handleChecked={handleChecked}
+                  />
+                );
+              }
+            })}
           </div>
           <div className="relative w-1/4 hidden md:flex">
             <div className=" mt-3 border-2 rounded-lg w-full p-2 py-4 h-min fixed max-w-[170px]  lg:max-w-[290px]">

@@ -1,15 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import CardProduct from '../componen/pragment/cardProduct';
-import { useEffect } from 'react';
-
 import { getProducts } from '../services/Fetchproducts';
 import { addProducts } from '../redux/action/productsSlice';
 import LayoutHomeUp from '../componen/layout/layoutHomeUp';
 import LayoutHomeDown from '../componen/layout/layoutHomeDown';
-import ImageSlider from './imageSlider';
+import CardProduct from '../componen/pragment/cardProduct';
 
-export default function Products() {
+export default function PageSearch() {
+  const { name } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
     getProducts((error, response) => {
@@ -21,17 +20,27 @@ export default function Products() {
       }
     });
   }, []);
-
   const products = useSelector((state) => state.products.data);
+
+  const [getProductsSearch, setGetProductsSearch] = useState([]);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      const newProduct = products.filter((product) =>
+        product.title.toLowerCase().includes(name.toLowerCase()),
+      );
+      setGetProductsSearch(newProduct);
+    }
+  }, [products]);
+
   return (
-    <>
+    <section className="">
       <LayoutHomeUp />
       <LayoutHomeDown />
-      <ImageSlider />
-      <div className="pt-8 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-28 2xl:px-28 justify-center grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] md:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))] ">
-        {products &&
-          products.length > 0 &&
-          products.map((product) => (
+
+      <div className=" pt-24 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-16 flex flex-wrap ">
+        {getProductsSearch.length > 0 &&
+          getProductsSearch.map((product) => (
             <CardProduct key={product.id}>
               <CardProduct.Image
                 key={`image-${product.id}`}
@@ -49,6 +58,6 @@ export default function Products() {
             </CardProduct>
           ))}
       </div>
-    </>
+    </section>
   );
 }
