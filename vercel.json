@@ -1,7 +1,0 @@
-{
-  "routes": [
-    { "src": "/search/:nameSearch", "dest": "/path/to/search" },
-    { "src": "/login", "dest": "/path/to/login" }
-  ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
-}
