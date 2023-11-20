@@ -26,7 +26,6 @@ export default function ImageSlider() {
 
     // Membersihkan interval saat komponen di-unmount
   }, []); // Dependensi kosong agar efek ini hanya dijalankan sekali saat komponen dipasang
-  const styleNum = (sliderState - 1) * 20;
 
   return (
     <section className=" flex justify-center">
@@ -66,31 +65,35 @@ export default function ImageSlider() {
 
             <div
               id="slider"
-              className={`w-[20%] h-80 overflow-hidden  bg-slate-400 transition-all duration-[2000ms] -ml-[${styleNum}%]`}
+              className={`w-[20%] h-80 overflow-hidden  bg-slate-400 transition-all duration-[2000ms] ${
+                sliderState === 1 ? '-ml-[0%]' : ''
+              } ${sliderState === 2 ? '-ml-[20%]' : ''} ${
+                sliderState === 3 ? '-ml-[40%]' : ''
+              } ${sliderState === 4 ? '-ml-[60%]' : ''}`}
             >
               <img
-                src="../../public/1.jpg"
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
             <div className="w-[20%] h-80 bg-slate-500 transition-all duration-[2000ms]">
               <img
-                src="../../public/2.jpg"
+                src="https://images.unsplash.com/photo-1619008054959-921a896885c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
             <div className="w-[20%] h-80 bg-slate-600 transition-all duration-[2000ms]">
               <img
-                src="../../public/3.jpg"
+                src="https://images.unsplash.com/photo-1573770012830-7cf1777db19c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
             <div className="w-[20%] h-80 bg-slate-700 transition-all duration-[2000ms]">
               <img
-                src="../../public/4.jpg"
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover "
                 alt=""
               />

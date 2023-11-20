@@ -204,9 +204,9 @@ function NavCart(props) {
           />
           <label
             htmlFor="allCheck"
-            className="ml-3 font-semibold text-slate-800 text-lg"
+            className="ml-3 font-semibold text-slate-800 text-base"
           >
-            Checked All
+            Cek All
           </label>
         </div>
         <div className="flex flex-row gap-3">
