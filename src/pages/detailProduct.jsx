@@ -51,7 +51,7 @@ export default function DetailProduct() {
         wishList={wishList}
       />
       <div className="w-full pt-24 px-5 lg:px-20 xl:px-32 mb-60">
-        <div className="flex lg:flex-nowrap justify-center gap-3">
+        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-3">
           {Object.keys(product).length > 0 && (
             <>
               <Image image={product.image} />
