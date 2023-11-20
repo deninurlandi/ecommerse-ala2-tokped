@@ -18,7 +18,7 @@ export default function FormRegister() {
     localStorage.setItem('telp', telp);
 
     if (password === confirmpassword) {
-      window.location.href = '/login';
+      window.location.href = 'https://store-ala2-tokped.vercel.app/login';
     } else {
       setTimeout(() => {
         setValid(true);
