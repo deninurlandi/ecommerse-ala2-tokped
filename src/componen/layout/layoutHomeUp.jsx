@@ -3,7 +3,7 @@
 
 import { Link } from 'react-router-dom';
 import { TotalCart } from '../../context/totalCart';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { NameSearch } from '../../context/nameSearch';
 
 /* eslint-disable react/no-unknown-property */
@@ -14,10 +14,17 @@ export default function LayoutHomeUp() {
   function handleSearch(e) {
     e.preventDefault();
     setNameSearch('');
-    if (nameSearch.trim() !== '') {
-      window.location.href = `/search/${encodeURIComponent(nameSearch)}`;
-    }
   }
+
+  function handleReload() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+  }
+
+  useEffect(() => {
+    setNameSearch('');
+  }, []);
 
   return (
     <>
@@ -62,6 +69,9 @@ export default function LayoutHomeUp() {
               placeholder="Search..."
               className="px-10 py-[5px] rounded-lg w-full border border-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-300 focus:border-cyan-300  "
             />
+            <Link to={'/search/' + nameSearch}>
+              <button onClick={handleReload}></button>
+            </Link>
           </form>
         </div>
         <div className="flex items-center">

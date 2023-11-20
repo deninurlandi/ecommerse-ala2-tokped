@@ -31,8 +31,8 @@ export default function ImageSlider() {
   return (
     <section className=" flex justify-center">
       <div className="pt-24 w-full max-w-[1200px] px-5 md:px-10 lg:px-16">
-        <div className="w-full rounded-lg h-80 border relative overflow-hidden">
-          <div className="w-[500%] flex h-80">
+        <div className="w-full rounded-lg h-72 sm:h-80 border relative overflow-hidden">
+          <div className="w-[500%] flex h-72 sm:h-80">
             <div className="hidden">
               <input
                 type="radio"
@@ -66,7 +66,7 @@ export default function ImageSlider() {
 
             <div
               id="slider"
-              className={`w-[20%] h-80 overflow-hidden  transition-all duration-[2000ms] ${
+              className={`w-[20%] h-72 sm:h-80 overflow-hidden  transition-all duration-[2000ms] ${
                 sliderState === 1 ? '-ml-[0%]' : ''
               } ${sliderState === 2 ? '-ml-[20%]' : ''} ${
                 sliderState === 3 ? '-ml-[40%]' : ''
@@ -78,21 +78,21 @@ export default function ImageSlider() {
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
+            <div className="w-[20%] h-72 sm:h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1619008054959-921a896885c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
+            <div className="w-[20%] h-72 sm:h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1573770012830-7cf1777db19c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
+            <div className="w-[20%] h-72 sm:h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover "
