@@ -119,6 +119,7 @@ export default function PageCart() {
         allChecked={allChecked}
         priceCheckot={priceCheckot}
         lengthCheckout={lengthCheckout}
+        cart={newCart}
       />
       {newCart.length > 0 && products && products.length > 0 && (
         <div className="w-full pt-24 px-6 md:flex md:justify-center md:gap-2">
@@ -147,7 +148,7 @@ export default function PageCart() {
           </div>
           <div className="relative w-1/4 hidden md:flex">
             <div className=" mt-3 border-2 rounded-lg w-full p-2 py-4 h-min fixed max-w-[170px]  lg:max-w-[290px]">
-              <div className="mb-5">
+              <div className="mb-5 flex items-center">
                 <input
                   onChange={handleAllChecked}
                   type="checkbox"
@@ -189,25 +190,30 @@ export default function PageCart() {
 }
 
 function NavCart(props) {
-  const { allChecked, handleAllChecked, priceCheckot, lengthCheckout } = props;
+  const { cart, allChecked, handleAllChecked, priceCheckot, lengthCheckout } =
+    props;
 
   return (
     <>
       <div className="z-10 border-t-2 bg-white border-cyan-500 md:hidden fixed flex justify-between items-center bottom-0 left-0 right-0 p-5 px-7 sm:px-9">
-        <div>
-          <input
-            onChange={handleAllChecked}
-            type="checkbox"
-            checked={allChecked}
-            className="w-4 h-4 accent-sky-500"
-            id="allCheck"
-          />
-          <label
-            htmlFor="allCheck"
-            className="ml-3 font-semibold text-slate-800 text-base"
-          >
-            Cek All
-          </label>
+        <div className="flex items-center">
+          {cart.length > 0 && (
+            <div>
+              <input
+                onChange={handleAllChecked}
+                type="checkbox"
+                checked={allChecked}
+                className="w-4 h-4 accent-sky-500"
+                id="allCheck"
+              />
+              <label
+                htmlFor="allCheck"
+                className="ml-3 font-semibold text-slate-800 text-base"
+              >
+                Check All
+              </label>
+            </div>
+          )}
         </div>
         <div className="flex flex-row gap-3">
           <div className="flex flex-col items-end justify-center">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // ImageSlider.jsx atau komponen yang berisi slider
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -18,7 +19,7 @@ export default function ImageSlider() {
       setSliderState((prevSliderState) =>
         prevSliderState === 4 ? 1 : prevSliderState + 1,
       );
-    }, 5000);
+    }, 6000);
     if (location.pathname !== '/') {
       clearInterval(intervalId);
     }
@@ -65,7 +66,7 @@ export default function ImageSlider() {
 
             <div
               id="slider"
-              className={`w-[20%] h-80 overflow-hidden  bg-slate-400 transition-all duration-[2000ms] ${
+              className={`w-[20%] h-80 overflow-hidden  transition-all duration-[2000ms] ${
                 sliderState === 1 ? '-ml-[0%]' : ''
               } ${sliderState === 2 ? '-ml-[20%]' : ''} ${
                 sliderState === 3 ? '-ml-[40%]' : ''
@@ -77,21 +78,21 @@ export default function ImageSlider() {
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80 bg-slate-500 transition-all duration-[2000ms]">
+            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1619008054959-921a896885c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80 bg-slate-600 transition-all duration-[2000ms]">
+            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1573770012830-7cf1777db19c?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover"
                 alt=""
               />
             </div>
-            <div className="w-[20%] h-80 bg-slate-700 transition-all duration-[2000ms]">
+            <div className="w-[20%] h-80  transition-all duration-[2000ms]">
               <img
                 src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="w-full h-full object-cover "
