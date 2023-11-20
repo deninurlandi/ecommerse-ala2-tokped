@@ -196,9 +196,9 @@ function NavCart(props) {
   return (
     <>
       <div className="z-10 border-t-2 bg-white border-cyan-500 md:hidden fixed flex justify-between items-center bottom-0 left-0 right-0 p-5 px-7 sm:px-9">
-        <div className="flex items-center">
+        <div className="">
           {cart.length > 0 && (
-            <div>
+            <div className="flex items-center">
               <input
                 onChange={handleAllChecked}
                 type="checkbox"
