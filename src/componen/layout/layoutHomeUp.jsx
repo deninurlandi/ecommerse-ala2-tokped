@@ -14,7 +14,9 @@ export default function LayoutHomeUp() {
   function handleSearch(e) {
     e.preventDefault();
     setNameSearch('');
-    window.location.href = `/search/${nameSearch}`;
+    if (nameSearch.trim() !== '') {
+      window.location.href = `/search/${encodeURIComponent(nameSearch)}`;
+    }
   }
 
   return (
