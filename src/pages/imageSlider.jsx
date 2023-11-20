@@ -19,7 +19,7 @@ export default function ImageSlider() {
       setSliderState((prevSliderState) =>
         prevSliderState === 4 ? 1 : prevSliderState + 1,
       );
-    }, 6000);
+    }, 5000);
     if (location.pathname !== '/') {
       clearInterval(intervalId);
     }
