@@ -101,7 +101,7 @@ export default function ImageSlider() {
             </div>
           </div>
 
-          <div className="absolute top-72 w-full flex justify-center">
+          <div className="absolute top-[265px] sm:top-72 w-full flex justify-center">
             <label
               htmlFor="slider-1"
               className={

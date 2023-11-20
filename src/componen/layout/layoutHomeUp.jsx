@@ -14,12 +14,7 @@ export default function LayoutHomeUp() {
   function handleSearch(e) {
     e.preventDefault();
     setNameSearch('');
-  }
-
-  function handleReload() {
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
+    window.location.href = `/search/${nameSearch}`;
   }
 
   useEffect(() => {
@@ -69,9 +64,6 @@ export default function LayoutHomeUp() {
               placeholder="Search..."
               className="px-10 py-[5px] rounded-lg w-full border border-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-300 focus:border-cyan-300  "
             />
-            <Link to={'/search/' + nameSearch}>
-              <button onClick={handleReload}></button>
-            </Link>
           </form>
         </div>
         <div className="flex items-center">
