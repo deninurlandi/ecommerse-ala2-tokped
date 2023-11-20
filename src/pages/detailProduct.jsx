@@ -51,7 +51,7 @@ export default function DetailProduct() {
         wishList={wishList}
       />
       <div className="w-full pt-24 px-5 lg:px-20 xl:px-32 mb-60">
-        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-3">
+        <div className="flex lg:flex-nowrap justify-center gap-3">
           {Object.keys(product).length > 0 && (
             <>
               <Image image={product.image} />
@@ -279,7 +279,7 @@ function NavDetailProduct({ id, price, handleStatWish, wishList }) {
     (item) => item.id === parseInt(id) && item.wishcek === true,
   );
   const svgStyle = checkWish ? 'fill-red-500' : 'fill-slate-400';
-  const pStyle = checkWish ? 'Wislish (✅)' : 'Add';
+  const pStyle = checkWish ? '(✅)' : 'Add';
 
   return (
     <>

@@ -206,7 +206,7 @@ function NavCart(props) {
             htmlFor="allCheck"
             className="ml-3 font-semibold text-slate-800 text-lg"
           >
-            Ceklis Semua
+            Checked All
           </label>
         </div>
         <div className="flex flex-row gap-3">

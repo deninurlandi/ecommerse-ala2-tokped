@@ -14,7 +14,7 @@ export default function DaftarWishlist() {
       <LayoutHomeUp />
       <LayoutHomeDown />
 
-      <div className=" pt-24 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-16 flex flex-wrap ">
+      <div className=" pt-24 pb-24 w-full gap-[5px] sm:gap-2 md:gap-3 px-5 md:px-10 xl:px-16 justify-center grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] ">
         {wishList.length > 0 &&
           products.length > 0 &&
           wishList.map((item) => {

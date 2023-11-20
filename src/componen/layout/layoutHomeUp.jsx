@@ -14,7 +14,7 @@ export default function LayoutHomeUp() {
   function handleSearch(e) {
     e.preventDefault();
     setNameSearch('');
-    window.location.href = `https://store-ala2-tokped.vercel.app/search/${nameSearch}`;
+    window.location.href = `/search/${nameSearch}`;
   }
 
   return (
