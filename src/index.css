@@ -31,16 +31,3 @@ body {
 .p-nav {
   @apply font-light text-xs group-hover:text-cyan-500;
 }
-
-#slider-1:checked ~ #imageSlider {
-  @apply ml-0;
-}
-#slider-2:checked ~ #imageSlider {
-  @apply -ml-[20%];
-}
-#slider-3:checked ~ #imageSlider {
-  @apply -ml-[40%];
-}
-#slider-4:checked ~ #imageSlider {
-  @apply -ml-[60%];
-}

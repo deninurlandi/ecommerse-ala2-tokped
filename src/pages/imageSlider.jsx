@@ -1,5 +1,5 @@
 // ImageSlider.jsx atau komponen yang berisi slider
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function ImageSlider() {
@@ -12,8 +12,6 @@ export default function ImageSlider() {
   useEffect(() => {
     handleRadioChange;
   }, []);
-
-  const slider = useRef();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -67,7 +65,7 @@ export default function ImageSlider() {
             </div>
 
             <div
-              ref={slider}
+              id="slider"
               className={`w-[20%] h-80 overflow-hidden  bg-slate-400 transition-all duration-[2000ms] -ml-[${styleNum}%]`}
             >
               <img
