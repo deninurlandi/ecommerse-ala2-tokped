@@ -38,11 +38,11 @@ function NamaImage() {
 }
 
 const tabs = [
-  { label: 'Info Pribadi', content: <InfoPerson /> },
-  { label: 'Saldo', content: <Saldo /> },
-  { label: 'Alamat', content: <Address /> },
-  { label: 'Rekening Bank', content: <Bank /> },
-  { label: 'Keamanan Akun', content: <Security /> },
+  { label: 'Info', content: <InfoPerson /> },
+  { label: 'balance', content: <Saldo /> },
+  { label: 'Address', content: <Address /> },
+  { label: 'Bank Account', content: <Bank /> },
+  { label: 'security', content: <Security /> },
 ];
 
 function Aboutme() {
@@ -60,15 +60,15 @@ function Aboutme() {
             key={index}
             onClick={() => handleTabClick(index)}
             className={
-              'p-2 mb-2 border-b-2 text-lg cursor-pointer hover:text-cyan-500' +
-              (activeTab === index ? ' text-cyan-500' : '')
+              'px-4 p-2 mb-2 border-b-2 text-lg cursor-pointer hover:text-cyan-300' +
+              (activeTab === index ? ' text-white bg-slate-400 rounded' : '')
             }
           >
             {tab.label}
           </div>
         ))}
       </div>
-      <div className="w-2/3 overflow-y-auto h-[270px]">
+      <div className="w-2/3 overflow-y-auto h-[270px] border-2 rounded-md p-2">
         {tabs[activeTab].content}
       </div>
     </div>

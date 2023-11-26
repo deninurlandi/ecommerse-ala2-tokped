@@ -6,7 +6,9 @@ export default function Transaction() {
     <>
       <LayoutHomeUp />
       <LayoutHomeDown />
-      <div className="pt-24 text-center">transaksi</div>
+      <div className="pt-20 text-center">
+        <p className="text-xl">Maaf fitur Transaksi Belum tersedia</p>
+      </div>
     </>
   );
 }
